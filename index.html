@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TOS and Test Questionnaire academic examination workflow" />
+    <title>ExamFlow · TOS & TQ Workspace</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#" aria-label="ExamFlow home">
+          <span class="brand-mark">E</span>
+          <span><strong>ExamFlow</strong><small>Academic Suite</small></span>
+        </a>
+        <nav>
+          <button class="nav-item active" data-view="workspace"><span data-icon="grid"></span>Workspace</button>
+          <button class="nav-item" data-view="packages"><span data-icon="file"></span>My packages <b>4</b></button>
+          <button class="nav-item" data-view="reviews"><span data-icon="review"></span>Review queue <b>2</b></button>
+          <button class="nav-item" data-view="notifications"><span data-icon="bell"></span>Notifications</button>
+        </nav>
+        <div class="sidebar-footer">
+          <button class="nav-item"><span data-icon="help"></span>Help center</button>
+          <div class="profile-mini">
+            <span class="avatar">AM</span><span><strong>Prof. Ana M.</strong><small>Faculty</small></span>
+            <button class="icon-button" aria-label="Profile options">•••</button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-area">
+        <header class="topbar">
+          <button class="icon-button mobile-only" id="menuButton" aria-label="Open navigation" aria-expanded="false"><span data-icon="menu"></span></button>
+          <div class="crumbs"><span>My packages</span><i>/</i><strong>CS 214 Midterm</strong></div>
+          <div class="top-actions">
+            <span class="save-state"><i></i><span>All changes saved</span></span>
+            <button class="icon-button notification-button" aria-label="Notifications"><span data-icon="bell"></span><b></b></button>
+            <button class="avatar-button" aria-label="Open user menu">AM</button>
+          </div>
+        </header>
+
+        <main id="workspace">
+          <section class="package-hero">
+            <div class="hero-copy">
+              <div class="eyebrow"><span class="status-pill draft">Draft</span><span>Version 3</span><span>Updated just now</span></div>
+              <div class="title-row">
+                <div><h1>Data Structures & Algorithms</h1><p>CS 214 · Midterm Examination · AY 2026–2027</p></div>
+                <div class="hero-actions">
+                  <button class="button secondary" id="previewButton"><span data-icon="eye"></span>Preview</button>
+                  <button class="button primary" id="submitButton">Submit for review<span data-icon="arrow"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <ol class="progress-track" aria-label="Approval progress">
+              <li class="current"><span>1</span><div><strong>Draft</strong><small>Faculty</small></div></li>
+              <li><span>2</span><div><strong>Coordinator</strong><small>Review</small></div></li>
+              <li><span>3</span><div><strong>Dean</strong><small>Approval</small></div></li>
+              <li><span>4</span><div><strong>Ready to print</strong><small>Printing Office</small></div></li>
+            </ol>
+          </section>
+
+          <div class="workspace-grid">
+            <section class="editor-card">
+              <div class="tabs" role="tablist" aria-label="Package documents">
+                <button role="tab" aria-selected="true" data-tab="tos">Table of Specifications <span id="tosBadge">40 items</span></button>
+                <button role="tab" aria-selected="false" data-tab="tq">Test Questionnaire <span id="tqBadge">4 questions</span></button>
+                <button role="tab" aria-selected="false" data-tab="review">Review & submit <span class="dot"></span></button>
+              </div>
+
+              <div class="tab-panel active" id="tosPanel" role="tabpanel">
+                <div class="panel-heading">
+                  <div><h2>Table of Specifications</h2><p>Align learning outcomes with Bloom's cognitive levels.</p></div>
+                  <div class="panel-tools"><button class="button quiet" id="autoAllocateButton"><span data-icon="spark"></span>Auto-allocate</button><button class="icon-button" aria-label="More TOS options">•••</button></div>
+                </div>
+                <div class="table-scroll">
+                  <table class="tos-table">
+                    <thead><tr><th class="outcome-col">Learning outcome</th><th>R</th><th>U</th><th>Ap</th><th>An</th><th>E</th><th>C</th><th>Total</th><th aria-label="Row actions"></th></tr></thead>
+                    <tbody id="tosBody"></tbody>
+                    <tfoot id="tosFoot"></tfoot>
+                  </table>
+                </div>
+                <button class="add-row" id="addOutcomeButton"><span>＋</span>Add learning outcome</button>
+                <div class="taxonomy-key"><strong>Bloom's key</strong><span><b>R</b> Remember</span><span><b>U</b> Understand</span><span><b>Ap</b> Apply</span><span><b>An</b> Analyze</span><span><b>E</b> Evaluate</span><span><b>C</b> Create</span></div>
+              </div>
+
+              <div class="tab-panel" id="tqPanel" role="tabpanel">
+                <div class="panel-heading"><div><h2>Test Questionnaire</h2><p>Build questions and connect each item to the TOS.</p></div><button class="button primary small" id="addQuestionButton">＋ Add question</button></div>
+                <div id="questionList" class="question-list"></div>
+              </div>
+
+              <div class="tab-panel" id="reviewPanel" role="tabpanel">
+                <div class="panel-heading"><div><h2>Review package</h2><p>Resolve all checks before routing this version.</p></div></div>
+                <div id="reviewChecklist" class="review-checklist"></div>
+              </div>
+            </section>
+
+            <aside class="summary-column" aria-label="Package summary">
+              <section class="summary-card validation-card">
+                <div class="card-title"><h2>Package health</h2><span class="score" id="healthScore">75%</span></div>
+                <div class="meter"><i id="healthMeter"></i></div>
+                <div id="validationSummary"></div>
+              </section>
+              <section class="summary-card exam-details">
+                <div class="card-title"><h2>Exam details</h2><button class="text-button">Edit</button></div>
+                <dl><div><dt>Exam date</dt><dd>October 16, 2026</dd></div><div><dt>Sections</dt><dd>BSCS 2A, 2B</dd></div><div><dt>Students</dt><dd>86</dd></div><div><dt>Duration</dt><dd>90 minutes</dd></div></dl>
+              </section>
+              <section class="summary-card print-card">
+                <div class="card-title"><h2>Printing gate</h2><span data-icon="lock"></span></div>
+                <div class="signature-list"><p><i class="signed">✓</i><span>Faculty attestation<small>Signed by Ana Mendoza</small></span></p><p><i>2</i><span>Coordinator approval<small>Awaiting submission</small></span></p><p><i>3</i><span>Dean approval<small>Not started</small></span></p></div>
+                <button class="button disabled" disabled><span data-icon="lock"></span>Print exam package</button>
+                <small class="gate-note">Available after all required approvals.</small>
+              </section>
+            </aside>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation"><button class="active"><span data-icon="grid"></span>Workspace</button><button><span data-icon="file"></span>Packages</button><button><span data-icon="review"></span>Reviews</button><button><span data-icon="bell"></span>Alerts</button></nav>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog id="submitDialog">
+      <form method="dialog">
+        <button class="icon-button close-dialog" value="cancel" aria-label="Close">×</button>
+        <span class="dialog-icon" data-icon="send"></span>
+        <h2>Submit this package?</h2>
+        <p>This freezes version 3 and routes the TOS and questionnaire to <strong>Dr. Samuel Reyes</strong>, Program Coordinator.</p>
+        <div id="dialogValidation"></div>
+        <div class="dialog-actions"><button class="button secondary" value="cancel">Keep editing</button><button class="button primary" id="confirmSubmit" value="default">Confirm submission</button></div>
+      </form>
+    </dialog>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
